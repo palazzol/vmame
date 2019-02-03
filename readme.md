@@ -35,4 +35,8 @@ now to build, type:
 make
 ```
 
+## Binaries ##
+
+Binaries are available in the bin directory.  You may also want to get the menuing software from the original ZVG site.
+
 
