@@ -19,6 +19,11 @@
 
 int mame_stricmp(const char *s1, const char *s2)
 {
+	if (s1 == 0)
+		return -1;
+	if (s2 == 0)
+		return +1;
+
 	for (;;)
  	{
 		int c1 = tolower(*s1++);
@@ -36,6 +41,10 @@ int mame_stricmp(const char *s1, const char *s2)
 int mame_strnicmp(const char *s1, const char *s2, size_t n)
 {
 	size_t i;
+	if (s1 == 0)
+		return -1;
+	if (s2 == 0)
+		return +1;
 	for (i = 0; i < n; i++)
  	{
 		int c1 = tolower(*s1++);

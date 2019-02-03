@@ -1024,7 +1024,10 @@ static void parse_cmdline( int argc, char **argv, int game_index )
 	int orientation;
 	machine_config drv;
 
-	game = game_index;
+	if (game_index == -1)
+		game = 0;
+	else
+		game = game_index;
 
 	/* force third mouse button emulation to "no" otherwise Allegro will default to "yes" */
 	set_config_string( 0, "emulate_three", "no" );
@@ -1340,7 +1343,7 @@ static void parse_cmdline( int argc, char **argv, int game_index )
 	options.artwork_res = atoi( s_artres );
 
 	/* first start with the game's built in orientation */
-	orientation = drivers[ game_index ]->flags & ORIENTATION_MASK;
+	orientation = drivers[ game ]->flags & ORIENTATION_MASK;
 	options.ui_orientation = orientation;
 
 	if( options.ui_orientation & ORIENTATION_SWAP_XY )
@@ -1384,7 +1387,7 @@ static void parse_cmdline( int argc, char **argv, int game_index )
 	}
 
 	/* auto-rotate right (e.g. for rotating lcds), based on original orientation */
-	if( config_autoror && ( drivers[ game_index ]->flags & ORIENTATION_SWAP_XY ) != 0 )
+	if( config_autoror && ( drivers[ game ]->flags & ORIENTATION_SWAP_XY ) != 0 )
 	{
 		/* if only one of the components is inverted, switch them */
 		if( ( orientation & ROT180 ) == ORIENTATION_FLIP_X ||
@@ -1396,7 +1399,7 @@ static void parse_cmdline( int argc, char **argv, int game_index )
 	}
 
 	/* auto-rotate left (e.g. for rotating lcds), based on original orientation */
-	if( config_autorol && ( drivers[ game_index ]->flags & ORIENTATION_SWAP_XY ) )
+	if( config_autorol && ( drivers[ game ]->flags & ORIENTATION_SWAP_XY ) )
 	{
 		/* if only one of the components is inverted, switch them */
 		if( ( orientation & ROT180 ) == ORIENTATION_FLIP_X ||
@@ -1511,6 +1514,8 @@ int penalty_compare (const char *s, const char *l)
 	int gaps = 0;
 	int match = 0;
 	int last = 1;
+
+	if (s==0) return 0;
 
 	for (; *s && *l; l++)
 	{
