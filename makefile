@@ -21,7 +21,7 @@
 #-------------------------------------------------
 
 ifndef TARGET
-TARGET = mame
+TARGET = vmame
 endif
 
 
@@ -32,7 +32,7 @@ endif
 #-------------------------------------------------
 
 ifndef MAMEOS
-MAMEOS = windows
+MAMEOS = msdos
 endif
 
 

@@ -32,7 +32,7 @@ also, add c:\djgpp\bin to your path
 now to build, type:
 
 ```
-make TARGET=vmame MAMEOS=msdos
+make
 ```
 
 
