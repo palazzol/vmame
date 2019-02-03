@@ -1,0 +1,433 @@
+0.106
+
+- merged fronthlp.c changes from windows [smf].
+
+- Changes for building mess [smf].
+
+==========================================================================
+
+0.105
+
+- replaced strnicmp() with mame_strnicmp() [smf].
+
+- changes for error log [smf].
+
+- removed osd_die and replaced with calls to fatalerror [smf].
+
+- merged fronthlp.c changes from windows [smf].
+
+- uses add_exit_callback() to call osd_exit [smf].
+
+- removed DRVLIBS from msdos.mak [smf].
+
+- added #includes for files no longer automatically #included in driver.h [smf].
+
+- removed osd_pause().
+
+==========================================================================
+
+
+0.104
+
+- added osd_file_error to osd_fopen().
+
+
+==========================================================================
+
+
+0.103
+
+- No changes.
+
+
+==========================================================================
+
+
+0.102
+
+- replaced stricmp() with mame_stricmp() [smf].
+
+
+==========================================================================
+
+
+0.101
+
+- Removed skip_validitychecks [smf].
+
+
+==========================================================================
+
+
+0.100
+
+- Changed structs to typedefs [smf].
+
+- Removed options that no longer exist in the core [smf].
+
+
+==========================================================================
+
+0.99
+
+- Removed PAIR union as it's now in core [smf].
+
+
+==========================================================================
+
+0.98
+
+- No changes.
+
+
+==========================================================================
+
+0.97
+
+- Fixed compiling MESS [smf].
+
+- Fixed game specific options in mame.cfg [smf].
+
+
+==========================================================================
+
+0.96
+
+- Added -skip_validitychecks [smf].
+
+
+==========================================================================
+
+0.95
+
+- Updated for new sound core. [smf/DoomSooth]
+
+
+==========================================================================
+
+0.92
+
+- Added -zvg_overlay, -zvg_artwork, -zvg_menu & -zvg 3. [Mark Perreira]
+
+
+==========================================================================
+
+0.91
+
+- No changes.
+
+
+==========================================================================
+
+0.90
+
+- No changes.
+
+
+==========================================================================
+
+0.89
+
+- Debug version will build with new debugger, but won't function [smf].
+
+
+==========================================================================
+
+0.88
+
+- 15 Khz VESA modes work again [smf].
+
+- Scales analogue joystick axis values [smf].
+
+- Removes mouse & joystick handler and shuts allegro down on exit [smf].
+
+
+==========================================================================
+
+0.87
+
+- Changes for MESS 0.87 [smf].
+
+
+==========================================================================
+
+0.86
+
+- Added missing isunordered() implementation [smf].
+
+
+==========================================================================
+
+0.85
+
+- More input port changes, joystick and second mouse support is not
+  tested. [smf].
+
+
+==========================================================================
+
+0.84
+
+- Input port changes [smf].
+
+- Removed -listinfo [smf].
+
+
+==========================================================================
+
+0.83
+
+- No changes.
+
+
+==========================================================================
+
+0.82
+
+- Dynamic refresh rate changes [smf].
+
+
+==========================================================================
+
+0.81
+
+- Fileio changes for MESS [smf].
+
+
+==========================================================================
+
+
+0.80
+
+- No changes.
+
+
+==========================================================================
+
+0.79
+
+- Multiple resolutions can be specified ( seperated by semi-colons ) [smf].
+
+
+==========================================================================
+
+
+0.78
+
+- Added fix from MESS CVS [smf].
+
+
+==========================================================================
+
+
+0.77
+
+- Links with libm.a for voodoo.o [smf].
+
+
+==========================================================================
+
+0.76
+
+- No changes.
+
+
+==========================================================================
+
+0.75
+
+- Added -joystick segapcifast/sidewinderag [smf].
+
+
+==========================================================================
+
+0.74
+
+- No changes.
+
+
+==========================================================================
+
+
+0.73
+
+- No changes.
+
+
+==========================================================================
+
+
+0.72
+
+- Updated for new snapshot code [smf].
+
+- Zektor ZVG support [Frank Palazzolo].
+
+
+==========================================================================
+
+
+0.71
+
+- No changes.
+
+
+==========================================================================
+
+
+0.70
+
+- Merged changes from windows where code is similar [smf].
+
+- Changed -bios to accept names as well as numbers [smf].
+
+
+==========================================================================
+
+
+0.69
+
+- Added -bios [smf].
+
+
+==========================================================================
+
+
+0.68
+
+- Removed -pb shortcut for -pause_brightness as it
+  conflicts with -playback [smf].
+
+- added -maxlogsize, -autorol, -autoror, -crconly,
+  -listmd5, -listsha1 [smf].
+
+- improved VESA mode auto selection when your card
+  doesn't support a resolution low or high enough [smf].
+
+- fixed mess support [smf].
+
+
+==========================================================================
+
+
+0.67
+
+- Experimental aspect ratio correction when
+  selecting VESA modes [smf].
+
+- Experimental fix for audio shutdown issues [smf].
+
+- Copied the top ten best match code from the windows
+  code [smf].
+
+- Improved clock speed detection when running under
+  Windows [smf].
+
+
+==========================================================================
+
+
+0.66
+
+- Improved VESA mode auto selection to work better with an
+  ArcadeVGA card [smf].
+
+- Corrupt ctrlr.ini files could cause a crash. [Nathan Woods].
+
+- sets _HUGE to HUGE_VAL in the makefile [smf].
+
+
+==========================================================================
+
+
+0.65
+
+
+- Fixed to compile with djdev 2.03 [logicx].
+
+
+==========================================================================
+
+
+0.64
+
+
+- Fixed some blitter bugs [smf].
+
+- added aspect ratio support [smf].
+
+- added preliminary -showusage [smf].
+
+
+==========================================================================
+
+
+0.63
+
+
+- Added ctrlr.ini support & removed -hotrod / -hotrodse. [smf]
+
+- Added support for new file/path handling & removed -romdir. [smf]
+
+- Added new -list options from windows console mame. [smf]
+
+- Added -skip_disclaimer / -skip_gameinfo. [smf]
+
+
+==========================================================================
+
+
+0.62
+
+
+- Takes account of the NEEDS_6BITS_PER_GUN flag [smf].
+
+- Supports 24bit vesa modes [smf].
+
+- Supports 8bit tweaked vga/ntsc/pal/arcade & vesa modes [smf].
+
+- Drops to a lower colour depth if the required one is not available [smf].
+
+- Converts colour depths & rotates in the final blit [smf].
+
+- The colour depth can be specified with the resolution [smf].
+
+- Vesa modes can be disabled completely [smf].
+
+- Half x/y vga & arcade tweaked modes are available when vesa is disabled [smf].
+
+- Fixed the ATI 15khz driver from always running in interlace mode [smf].
+
+- ATI 15khz driver automatically switches to software pixel doubling if the card has an external clock [smf].
+
+- Added vertical scanlines [smf].
+
+- Allows game specific options in mame.cfg [Andre Cotrim].
+
+
+- Running with -soundcard 0 no longer disables the audio chips as some games won't work without them [smf].
+
+- Keyboard led updates can be disabled [smf].
+
+- Supports hard drive images [smf].
+
+- No longer requires an fpu [smf].
+
+- Added alot of configuration options & command line shortcuts from windows console mame [smf].
+
+- The debugger turns on auto frameskip & throttling when active [smf].
+
+
+==========================================================================
+
+
+0.61
+
+
+- Changes for the new artwork system [smf].
+
+- Fixed -skiprows / -skipcolumns [smf].
+
+- Added -hotrod / -hotrodse back again [smf].
+
+- Fixed the debugger to work in any colour depth [smf].

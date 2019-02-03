@@ -1,0 +1,822 @@
+
+Using the program
+-----------------
+
+MAME [name of the game to run] [options]
+
+for example:
+
+   MAME mspacman -soundcard 0
+
+...will run Ms Pac Man without sound
+
+
+Note: By default, all the '-list' commands below write info to the screen. If
+you wish to write the info to a textfile instead, add this to the end of your
+command:
+
+  > filename
+
+...where 'filename' is the textfile's path and name (e.g., c:\mame\list.txt).
+
+
+MAME frontend options
+---------------------
+
+-help, -h, -?
+Displays current MAME version and copyright notice
+
+-list / -ls
+
+	Displays a list of currently supported games.
+
+
+-listfull / -ll
+
+	Displays a list of game directory names + descriptions.
+
+-listgames
+
+	List the supported games, year, manufacturer.
+
+-listdetails
+
+	Displays a detailed list of drivers and the hardware they use.
+
+-gamelist
+
+	Used internally to create gamelist.txt
+
+-listsourcefile
+
+	Displays the source file (in the drivers directory) containing the
+	driver for the specified game. Useful for finding which driver a game
+	runs on in order to fix bugs.
+
+-listgamespersourcefile
+
+	Some statistical data.
+
+-listxml / -lx
+
+	List comprehensive details for all of the supported games. The output
+	is quite long, so better redirect this into a file. The output is in
+	XML format.
+
+-listclones / -lc
+
+	Lists clones of the specified game. When no game is specified, this
+	generates a list of all MAME-supported clones.
+
+-listsamdir
+
+	List directory names for samples. Some clones can share their samples
+	with their parents (no pun intended).
+
+-listcrc
+
+	List CRC32 checksums of rom files
+
+-listsha1
+
+	List SHA-1 checksums of rom files
+
+-listmd5
+
+	List MD5 checksums of rom files
+
+-listdupcrc
+
+	Find romfiles with same CRC32 (for developers).
+
+-listwrongmerge / -lwm
+
+	An attempt to catch careless developers.
+
+-listromsize
+-listromdistribution
+-listromnumber
+-listpalettesize / -lps
+-listcpu
+-listcpuclass
+-listnosound
+
+-listsound
+
+-listnvram
+
+	Lists various statistical data.
+
+-wrongorientation
+-wrongfps
+
+	An attempt to catch careless developers.
+
+-[no]clones
+
+	Used together with the list commands, enables/disables listing of
+	alternate ("cloned") versions of the same game. The default is ON.
+
+-listroms
+
+	Displays ROMs required by the specified game.
+
+-listsamples
+
+	Displays samples required by the specified game.
+
+-verifyroms
+
+	Checks specified game(s) for missing and invalid ROMs.	Adding "*"
+	checks all available games.
+
+-verifysets
+
+	Checks specified game(s) and reports its status. Adding "*" checks all
+	available games. Terse output.
+
+-vset
+
+	Checks specified game(s) and reports its status. Adding "*" checks all
+	available games. Slightly more verbose output.
+
+-verifysamples
+
+	Check selected game for missing samples. Adding "*" checks all
+	available samples.
+
+-vsam
+
+	Check selected game for missing samples. Adding "*" checks all
+	available samples.
+
+-romident
+
+	Attempts to identify ROM files, if they are known to MAME, in the
+	specified .zip file. Can be used to try and identify ROM sets taken
+	from unknown boards.
+
+-isknown
+
+	Very terse romident.
+
+-sortname
+-sortdriver
+
+	Used internally for creating gamelist.txt
+
+MSDOS path and directory options
+--------------------------------
+
+-rompath / -rp
+
+	You can give a path (list of directories seperated by semicolons) of
+	directories to be searched for roms. The default is ROMS (that is, a
+	directory "roms" in the current directory).
+
+-samplepath / -sp
+
+	You can give a path (list of directories seperated by semicolons) of
+	directories to be searched for samples. The default is SAMPLES (that
+	is, a directory "samples" in the current directory).
+
+-inipath
+
+	You can give a path (list of directories seperated by semicolons) of
+	directories to be searched for INI-files. The default is .;ini (that
+	is, search in the current directory first, and then in the directory
+	"ini" in the current directory).
+
+-cfg_directory
+
+	After running a game, MAME stores some user changeable settings into
+	cfg_directory/gamename.cfg. Additionally, on the first start of MAME a
+	cfg_directory/default.cfg is created. The default is CFG.
+
+-nvram_directory
+
+	The original hardware of some games use non-volative ram chips to save
+	their configuration. The contents of these are saved into this
+	directory. The default is NVRAM.
+
+-memcard_directory
+
+	The original hardware of some games supports so-called memory cards.
+	The contents of these are stored here. The default is MEMCARD.
+
+-input_directory
+
+	Input recordings created by "-record" will be saved here and loaded by
+	"-playback". The default is INP.
+
+-hiscore_directory
+
+	If there exists a file HISCORE.DAT in the MAME directory, highscores
+	may also be saved for games that do not have the original hardware to
+	support this. The quality of this feature depends on the accuracy of
+	the externally available file HISCORE.DAT. The default is HI.
+
+-state_directory
+
+	MAME supports state saving for some games. These states will be saved
+	here. The default is STATE.
+
+-artwork_directory
+
+	Some games used extra artwork not created by electical circuits. MAME
+	supports such artwork in PNG image format, located in this directory.
+	The default is ARTWORK.
+
+-snapshot_directory
+
+	Screenshots will go here. The default is SNAP.
+
+-diff_directory
+
+	Directory for hard drive image difference files. The default is DIFF.
+
+-ctrlr_directory
+
+	This directory holds controller-specific input port mapping .cfg files.
+	The default is CTRLR.
+
+-cheat_file
+
+	The default is CHEAT.DAT. Modifying the default may not work at the
+	moment.
+
+-history_file
+
+	The default is HISTORY.DAT. Modifying the default may not work at the
+	moment.
+
+-mameinfo_file
+
+	The default is MAMEINFO.DAT. Modifying the default may not work at the
+	moment.
+
+MSDOS video options
+-------------------
+
+-frameskip N / -fs N (default: auto)
+
+	Skips frames to speed up the emulation. The argument is the number
+	of frames to skip out of 12. For example, if the game normally
+	runs at 60 fps, '-frameskip 2' will make it run at 50 fps,
+	'-frameskip 6' at 30 fps. Use F11 to display the speed your
+	computer is actually reaching. If it is below 100%, increase the
+	frameskip value. You can press F9 to change frameskip while
+	running the game.
+	When set to auto (the default), the frameskip setting is
+	dynamically adjusted during run time to display the maximum
+	possible frames without dropping below 100% speed.
+
+-[no]waitvsync (default: -nowaitvsync)
+
+	Waits for vertical sync to reduce display tearing.
+
+-[no]triplebuffer / [no]tb (default: -notriplebuffer)
+
+	Enables triple buffering with VESA modes. This is faster than
+	-vsync, but doesn't work on all cards. Even if it does remove
+	"tearing" during scrolling, it might not be as smooth as -vsync.
+
+-[no]stretch (default: -stretch)
+	use nostretch to disable pixel doubling in VESA modes (faster,
+	but smaller picture).
+
+-resolution WxHxD / -r WxHxD
+
+	where W and H are width and height (ex: '-resolution 800x600')
+	and D is the depth ( this overrides the -depth parameter ).
+	MAME goes to some lengths to autoselect a good resolution. You
+	can override MAME's choice with this option. You can omit the
+	word "resolution" and simply use -XxY (e.g. '-800x600') as a
+	shortcut. Frontend authors are advised to use '-resolution XxY',
+	however.
+
+-vectorres WxHxD
+
+	Allows you to specify a different resolution used for vector games.
+
+
+-scanlines / -sl yes/no/horizontal/vertical (default: yes)
+
+	Scanlines are small, evenly-spaced, horizontal/vertical blank
+	lines that are typical of real arcade monitors. If you don't
+	prefer this "authentic" look, turn scanlines off. By default
+	the scanlines will match the orientation of the game, if you
+	don't like this you can force either horizontal or vertical
+	scanlines.
+
+
+-[no]keepaspect / -[no]ka
+
+	Enables aspect ratio enforcement. When this option is on, the game's
+	proper aspect ratio (generally 4:3 or 3:4) is enforced, so you get the
+	game looking like it should. By turning the option off, the aspect ratio
+	is allowed to float. In full screen mode, this means that all games will
+	stretch to the full screen size (even vertical games).
+	The default is ON (-keepaspect).
+
+-[no]throttle
+
+	Configures the default thottling setting. When throttling is on, MAME
+	attempts to keep the game running at the game's intended speed. When
+	throttling is off, MAME runs the game as fast as it can. The default is
+	ON (-throttle).
+
+-screen_aspect
+
+	Give a screen aspect ration in the form X:Y where X is the horizontal
+	and Y the vertical part. Examples are 4:3 for most resolution settings
+	on computer monitors, 5:4 for the 1280x1024 resolution or 3:4 for
+	turnable LCD's in the turned position. The default is 4:3.
+
+-[no]vsync (default: -novsync)
+
+	Synchronize video display with the video beam instead of using
+	the timer. This option can be used only if the selected video
+	mode has an appropriate refresh rate. Otherwise, MAME will
+	refuse to start, telling you the actual refresh rate of the video
+	mode, and the rate it should have.
+	If you are using a tweaked mode, MAME will try to automatically
+	pick the correct setting for -vgafreq; you can still override it
+	using the -vgafreq option.
+	Note: the 224x288 / noscanlines mode doesn't work on most cards.
+	Many games use this mode, e.g. Pac Man and Galaga. If it doesn't
+	work with your card, either turn scanlines on, or don't use
+	-vsync.
+	If you are using a VESA mode, you should use the program that
+	came with your video card to set the appropriate refresh rate.
+	Note that when this option is turned on, speed will NOT
+	downgrade nicely if your system is not fast enough (i.e.,
+	gameplay will be jerky).
+
+-[no]tweak (default: -notweak)
+
+	MAME supports a large number of tweaked VGA modes whose
+	resolutions matching those of the emulated games. These modes
+	look MUCH better than VESA modes (and are usually faster), but
+	they may create compatibility problems with some video cards and
+	monitors. Therefore, they are not enabled by default. You should
+	by all means use -tweak if your hardware supports it. Note that
+	some modes might work and other might not--e.g. your card could
+	support 256x256 but not 384x224. In that case, you'll have to
+	turn -tweak on or off depending on the game you run. -noscanlines
+	can also solve many compatibility problems. Tweaked modes only
+	support 256 colours.
+
+-vesamode / -vesa yes/no/vesa1/vesa2b/vesa2l/vesa3 (default: vesa3)
+
+	Forces the VESA mode. The best available one is used by default.
+	no disables VESA, you will need to enable tweaked modes.
+	If your video card crashes during autodetection, however, use
+	this option to force a lower standard. (Start with vesa1, and go
+	upwards to find the highest one that works.)
+
+-[no]mmx (default: auto)
+
+	By default mmx instructions will be used if available when
+	using non rotated linear vesa modes.
+
+-vgafreq 0/1/2/3 (default: 0)
+
+	Specifies different frequencies for the custom video modes. This
+	can reduce flicker, especially in 224x288 / noscanlines mode.
+	WARNING: IT IS POSSIBLE TO SET FREQUENCIES WAY OUTSIDE OF YOUR
+	MONITOR'S RANGE, WHICH COULD DAMAGE YOUR MONITOR. BEFORE USING
+	THIS OPTION, BE SURE YOU KNOW WHICH FREQUENCIES YOUR MONITOR
+	SUPPORTS. USE THIS OPTION AT YOUR OWN RISK.
+
+-[no]alwayssynced (default: -noalwayssynced)
+
+	For many tweaked VGA modes, MAME has two definitions: One which
+	is more compatible, and one which is less compatible but uses
+	frequencies compatible with -vsync. By default, the less-
+	compatible definition is used only when -vsync is requested;
+	using this option, you can force it to be used always.
+
+-depth auto/8/15/16/24/32 (default: auto)
+
+	The lowest mode necessary will be picked by default.
+	If that depth isn't supported then it will try lower ones.
+	When both tweaked VGA & VESA modes are enabled it will switch
+	to 8 bit mode if the game uses 256 colours or less. To improve
+	speed, you can use '-depth 8', which limits the display to
+	standard 256-color mode.
+
+-skiplines N
+-skipcolumns N
+	If you run a game in a video mode smaller than the visible area,
+	you can adjust its position using the PgUp and PgDn keys (alone
+	for vertical panning, shifted for horizontal panning). You can
+	also use these two parameters to set the initial position: -1 is
+	the default, meaning that the screen is centered.
+
+-monitor X (default: standard)
+
+	Selects the monitor type:
+
+	standard: standard PC monitor
+	ntsc:     NTSC monitor
+	pal:      PAL monitor
+	arcade:   arcade monitor
+
+-centerx N and -centery N
+
+	Each takes a signed value (-8 to 8 for centerx, -16 to 16 for
+	centery) and lets you change the low scanrate modes (monitor=ntsc,
+	pal, arcade).
+
+-waitinterlace
+
+	Forces update of both odd and even fields of an interlaced low
+	scanrate display (monitor=ntsc,pal,arcade) for each game loop.
+
+-zvg N ( default: 0 )
+
+	Set to 1 to display vector output using a ZVG board, the on
+	screen menus will only be displayed on the raster monitor.
+	If you don't have a raster monitor attached and your machine
+	isn't fast enough to generate the output for both monitors
+	then set it to 2.
+
+MSDOS sound options
+-------------------
+
+-soundcard N (default: -1)
+
+	Selects sound card. By default MAME will ask you.
+
+-[no]stereo (default: -stereo)
+
+	Selects stereo or mono output for games supporting stereo sound.
+
+-[no]sampleratedetect (default: -sampleratedetect )
+
+	By default the sample rate of the sound card will be detected.
+
+
+Input device options
+--------------------
+
+-[no]mouse (default: -mouse)
+
+	Enables/disables mouse support
+
+-joystick X / -joy X (default: none)
+
+	Allows joystick input. 'name' can be:
+
+	none         - no joystick
+	auto         - attempts auto detection
+	standard     - normal 2 button joystick
+	dual         - dual joysticks
+	4button      - Stick/Pad with 4 buttons
+	6button      - Stick/Pad with 6 buttons
+	8button      - Stick/Pad with 8 buttons
+	fspro        - CH Flightstick Pro
+	wingex       - Wingman Extreme
+	wingwarrior  - Wingman Warrior
+	sidewinder   - Microsoft Sidewinder (up to 4)
+	gamepadpro   - Gravis GamePad Pro
+	grip         - Gravis GrIP
+	grip4        - Gravis GrIP constrained to move only along the
+	               x and y axes
+	sneslpt1     - SNES pad on LPT1 (needs special hardware)
+	sneslpt2     - SNES pad on LPT2 (needs special hardware)
+	sneslpt3     - SNES pad on LPT3 (needs special hardware)
+	psxlpt1      - PSX pad on LPT1 (needs special hardware)
+	psxlpt2      - PSX pad on LPT2 (needs special hardware)
+	psxlpt3      - PSX pad on LPT3 (needs special hardware)
+	n64lpt1      - N64 pad on LPT1 (needs special hardware)
+	n64lpt2      - N64 pad on LPT2 (needs special hardware)
+	n64lpt3      - N64 pad on LPT3 (needs special hardware)
+	db9lpt1      - C64/Atari/Sinclair joy via DB9 interface on LPT1
+	db9lpt2      - C64/Atari/Sinclair joy via DB9 interface on LPT2
+	db9lpt3      - C64/Atari/Sinclair joy via DB9 interface on LPT3
+	tgxlpt1      - digital joystick via Turbografix if on LPT1
+	tgxlpt2      - digital joystick via Turbografix if on LPT2
+	tgxlpt3      - digital joystick via Turbografix if on LPT3
+
+Notes:
+	1) Use the TAB menu to calibrate analog joysticks. Calibration
+	   data will be saved in mame.cfg. If you're using different
+	   joysticks for different games, you may need to recalibrate your
+	   joystick every time.
+
+	2) Extra buttons of noname joysticks may not work.
+
+	3) The "official" Snespad-Support site is:
+
+	   http://snespad.emulationworld.com
+
+	4) http://www.debaser.force9.co.uk/ccmame has info on how to
+	   connect PSX and N64 pads.
+
+	5) http://www.burg-halle.de/~schwenke/parport.html for details on
+	   how to build Turbografix interface for 1-7 joysticks. Also go
+	   there for information on DB9 interface, the cheapest
+	   (wires-only) joystick interface ever.
+
+-[no]steadykey / [no]steady
+
+	Some games require two or more buttons to be pressed at exactly
+	the same time to make special moves. Due to limitations in the PC
+	keyboard hardware, it can be difficult or even impossible to
+	accomplish that using the standard keyboard handling. This option
+	selects a different handling that makes it easier to register
+	simultaneous button presses, but has the disadvantage of making
+	controls less responsive.
+
+-[no]keyboard_leds / -[no]leds
+
+	Since MAME uses an input device (keyboard) for output, this sort of
+	belongs here. Using this option enables/disables simulation of the game
+	LEDs by the keyboard LEDs. This works fine, but can lead to problems
+	after exiting MAME (i.e. CAPS LOCK remains ON), so you can disable it
+	here. The default is ON (-keyboard_leds).
+
+-ctrlr <controller>
+
+	Enables support for special controllers. Configuration files are
+	provided for:
+
+		hotrod	    HotRod
+		hotrodse    HotRod SE
+		slikstik    SlikStik
+		xarcade     X-Arcade
+
+MAME core video options
+-----------------------
+
+-[no]norotate
+-[no]ror
+-[no]rol
+-[no]autoror
+-[no]autorol
+-[no]flipx
+-[no]flipy
+
+	These are the standard MAME rotation options. They are all OFF by
+	default.
+
+-debug_resolution WxHxD / -dr WxHxD (default: auto)
+
+	Specifies the resolution when the debugger is enabled. This
+	controls how big the debugger screen will be, and therefore,
+	how many rows/columns it will display.
+	The default is 640x480.
+
+
+-gamma
+
+	This controls the global gamma correction in the game. It is the same
+	gamma that is applied when you bring up the on-screen-display within
+	MAME. The default is 1.0.
+
+-brightness / -bright
+
+	This controls the global brightness correction in the game. It is the
+	same brightness that is applied when you bring up the on-screen-display
+	within MAME. The default is 1.0.
+
+-pause_brightness
+
+	This controls the brightness level when MAME is paused. The default
+	value is 0.65.
+
+
+MAME core vector options
+------------------------
+
+-[no]antialias / -[no]aa
+
+	Antialiasing for vector games. The default is ON (-antialias).
+
+-[no]translucency / -[no]tl
+
+	Enables or disables vector translucency. Colors of crossing vector
+	beams will be merged. The default is ON (-translucency).
+
+-beam
+
+	Sets the width in pixels of the vectors. This option expects a float in
+	the range of 1.00 through 16.00 as argument. The default is 1 (1 pixel
+	wide).
+
+-flicker
+
+	Makes the vectors flicker. This option requires a float argument in the
+	range of 0.00 - 100.00 (0=none, 100=maximum). The default is 0.
+
+-intensity
+
+	Sets the intensity correction for the beam. Higher values give a
+	brighter beam. This option expects a float in the range of 0.5 through
+	3.0 as argument.  The default is 1.5.
+
+
+MAME core sound options
+-----------------------
+
+-samplerate / -sr
+
+	Sets the audio sample rate. Smaller values (e.g. 11025) cause lower
+	audio quality but faster emulation speed. Higher values (e.g. 44100)
+	cause higher audio quality but slower emulation speed. The default is
+	44100.
+
+-[no]samples
+
+	Use samples if available. The default is ON (-samples).
+
+-[no]resamplefilter
+
+	If the samplerate of the original hardware does not match the
+	samplerate actually used by an integer factor, apply a filter. This is
+	more faithful to the original sound, however, the sound may not be as
+	crisp. The default is ON (-resamplefilter).
+
+-[no]sound
+
+	Enable or disable sound altogether. The default is ON (-sound).
+
+	Some games will not work correctly without emulating the sound cpu's.
+
+-volume / -vol
+
+	Sets the startup volume. It can later be changed with the On Screen
+	Display (see Keys section). The volume is an attenuation in dB: e.g.,
+	"-volume -12" will start with -12dB attenuation. The default is 0.
+
+
+MAME core misc options
+----------------------
+
+-[no]artwork / -[no]art
+
+	Enable or disable usage of additional artwork (backdrops, overlays,
+	etc.). The default is ON (-artwork).
+
+-[no]use_backdrops / -[no]backdrop
+
+	Enables/disables the display of backdrops. The default is ON
+	(-use_backdrops).
+
+-[no]use_overlays / -[no]overlay
+
+	Enables/disables the display of overlays. The default is ON
+	(-use_overlays).
+
+-[no]use_bezels / -[no]bezel
+
+	Enables/disables the display of bezels. The default is ON
+	(-use_bezels).
+
+-[no]artwork_crop / -[no]artcrop
+
+	This will crop the artwork to the game screen area only. The default is
+	OFF (-noartwork_crop).
+
+-artwork_resolution / -artres
+
+	Scale the game by this factor to accommodate for higher resolution
+	artwork. The default is 0 (auto).
+
+-[no]cheat / -[no]c
+
+	Cheats, like the speedup in Pac Man or the level-skip in many other
+	games, are disabled by default. Use this switch to turn them on. The
+	default is OFF (-nocheat).
+
+-[no]debug
+
+	Activates the integrated debugger.  During emulation, press the tilde
+	key (~) to activate the debugger. This is available only if the program
+	is compiled with MAME_DEBUG defined. The default is OFF (-nodebug).
+
+-playback / -pb
+
+	Expects a filename as parameter. Play back all game inputs from from
+	file INP/filename.inp. The gamename is contained in this file,
+	therefore a gamename needs not be given on the commandline.
+
+-record / -rec
+
+	Expects a filename as parameter. All game inputs are written to the
+	file INP/filename.inp.
+
+-[no]log
+
+	Creates a log of illegal memory accesses in ERROR.LOG. The default is
+	OFF (-nolog).
+
+-maxlogsize
+
+	Expects a number as parameter. If the size of error.log (in kilobytes)
+	hits that number, MAME will exit. By default, this is set fairly low
+	(10 MB). This is in effect only if you are actually generating the
+	error.log file.
+
+-language X (default: english)
+
+	Allows you to localise the user interface.
+
+-[no]skip_disclaimer
+
+	Forces MAME to skip displaying the disclaimer screen. The default is
+	OFF (-noskip_disclaimer).
+
+-[no]skip_gameinfo
+
+	Forces MAME to skip displaying the game info screen. The default is OFF
+	(-noskip_gameinfo).
+
+-[no]crconly
+
+	Tells MAME to only use CRCs for ROM integrity checks. This disables
+	checking against the more reliable SHA1 hashes. Default is OFF
+	(-nocrconly).
+
+-bios
+
+	Expects a BIOS name as the parameter. -listxml will list the possible
+	BIOS names for a game/system.
+
+
+Configuration options
+---------------------
+
+-createconfig / -cc
+
+	Creates the default MAME.CFG file. All the following configuration
+	options can be permanently changed by editing this configuration file.
+
+-showusage / -su
+
+	Displays a summary of all the command line options. For options that
+	are not mentioned here, the short summary given by "mame -showusage" is
+	usually sufficient.
+
+-ignorecfg
+
+	ignore mame.CFG and start with the default settings
+
+
+Keys
+----
+
+Tab	     Toggles the configuration menu
+
+Tilde	     Toggles the On Screen Display. Use the up and down arrow keys to
+	     select the parameter (global volume, mixing level, gamma
+	     correction etc.), left and right to arrow keys to modify it.
+
+P	     Pauses the game
+
+Shift+P      While paused, advances to next frame
+
+F1	     toggle raster effects in some games
+
+F2	     Service Mode
+
+F3	     Resets the game
+
+F4	     Shows the game palette, decoded GFX, and any tilemaps
+	     Cursor left/right changes between palette, GFX and tilemaps
+	     Cursor up/down cycle through valid palettes
+	     Page up/down scroll through the palette and GFX
+	     Page up/down, D, G scroll the tilemap display
+	     Ctrl & Shift are modifiers to change movement speed.
+	     F4 or Esc returns to the emulation.
+	     Note: Not all games have decoded graphics and/or tilemaps.
+
+F5	     Toggle debugger (only in debug build)
+
+F6	     Toggle cheat mode (if started with "-cheat")
+
+F7	     Load a 'Save State'. You will be requested to press a key to
+	     determine which Save State you wish to load. Note that the 'Save
+	     State' feature is for developing drivers and not intended for
+	     users. It is incomplete and works only on a number of drivers. Use
+	     at own risk.
+
+Shift+F7     Create a 'Save State'. Requires an additional keypress to identify
+	     the state.
+
+F8	     Decrease frame skip on the fly
+
+F9	     Increase frame skip on the fly
+
+F10	     Toggles speed throttling
+
+F11	     Toggles speed display
+
+Shift+F11    Toggles profiler display (debug builds only)
+
+F12	     Saves a screen snapshot. The default target directory is SNAP.
+
+ESC	     Exits emulator
+
