@@ -21,19 +21,24 @@ The fixes I did to dosmame all apply to the msdos-specific code.
 
 I have included this version of djgpp, as well as the original MAME sources, in the tools directory
 
-If djgpp is installed in c:\djgpp
+To install djgpp and the extra stuff you need:
 
-```
-set DJGPP=c:\djgpp\djgpp.env
-```
+1) Unzip the file **tools\djgpp-gcc343.zip** into a directory on Win98, such as **c:\djsetup**
 
-also, add c:\djgpp\bin to your path
+2) type: **cd c:\djsetup** (Change to that directory)
 
-now to build, type:
+2) type: **set OS=Windows_NT**  (This is a workaround for a small bug in this install package)
+   
+3) type: **install.bat** (This will build and install djgpp and install the graphics, sound, and zvg support files)
 
-```
-make
-```
+Note: this script sets the environment variable DJGPP=c:\djgpp\djgpp.env, and puts c:\djgpp\bin in your path
+You will need to do this again if you restart your system for some reason
+
+Now, to build mame, go into your repo directory and type: 
+
+**make TARGET=vmame MAMEOS=msdos**
+
+If all goes well you should get a fresh **dvmame.exe** in the current directory
 
 ## Binaries ##
 
