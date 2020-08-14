@@ -1004,7 +1004,9 @@ struct rc_option config_opts[] =
 	{ "record", "rec", rc_string, &recordname, NULL, 0, 0, NULL, "record an input file" },
 	{ "log", NULL, rc_bool, &errorlog, "0", 0, 0, init_errorlog, "generate error.log" },
 //	{ "oslog", NULL, rc_bool, &erroroslog, "0", 0, 0, NULL, "output error log to debugger" },
+	{ "skip_disclaimer", NULL, rc_bool, &options.skip_disclaimer, "0", 0, 0, NULL, "skip displaying the disclaimer screen" },
 	{ "skip_gameinfo", NULL, rc_bool, &options.skip_gameinfo, "0", 0, 0, NULL, "skip displaying the game info screen" },
+	{ "skip_warnings", NULL, rc_bool, &options.skip_warnings, "0", 0, 0, NULL, "skip displaying the warnings" },
 	{ "bios", NULL, rc_string, &options.bios, "default", 0, 14, NULL, "change system bios" },
 //	{ "state", NULL, rc_string, &statename, NULL, 0, 0, NULL, "state to load" },
 
@@ -1181,7 +1183,9 @@ static void parse_cmdline( int argc, char **argv, int game_index )
 	options.language_file		= mame_fopen( 0, s_language, FILETYPE_LANGUAGE, 0 );
 
 	options.pause_bright		= get_float( "config", "pause_brightness", NULL, 0.65, 0.5, 2.0 );
+	options.skip_disclaimer     = get_bool( "config", "skip_disclaimer", NULL, 0 );
 	options.skip_gameinfo		= get_bool( "config", "skip_gameinfo", NULL, 0 );
+	options.skip_warnings       = get_bool( "config", "skip_warnings", NULL, 0 );
 	s_bios						= get_string( "config", "bios", NULL, "default", NULL, NULL, NULL );
 
 	/* process graphic configuration */
