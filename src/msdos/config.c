@@ -1800,7 +1800,7 @@ int cli_frontend_init( int argc, char **argv )
 		}
 #endif
 		/* we give up. print a few approximate matches */
-		if (game_index == -1)
+		if ((game_index == -1) && (gamepath != 0))
 		{
 			fprintf(stderr, "\n\"%s\" approximately matches the following\n"
 					"supported games (best match first):\n\n", gamename);
@@ -1808,7 +1808,8 @@ int cli_frontend_init( int argc, char **argv )
 			return -1;
 		}
 
-		srcfile = dos_strip_extension( dos_basename( drivers[ game_index ]->source_file ) );
+		if (game_index != -1)
+			srcfile = dos_strip_extension( dos_basename( drivers[ game_index ]->source_file ) );
 
 		get_fileio_opts();
 
@@ -1816,7 +1817,8 @@ int cli_frontend_init( int argc, char **argv )
 		rc_register( rc, frontend_opts );
 #ifdef MESS
 		rc_register( rc, mess_opts );
-		msdos_add_mess_device_options(rc, drivers[game_index]);
+		if (game_index != -1)
+			msdos_add_mess_device_options(rc, drivers[game_index]);
 #endif
 		get_rc_opts( rc->option );
 		rc_destroy( rc );
