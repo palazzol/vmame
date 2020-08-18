@@ -421,11 +421,13 @@ int frontend_help (const char *gamename, const char *filename)
 	{
 		#ifndef MESS
 		printf("M.A.M.E. v%s - Multiple Arcade Machine Emulator\n"
+		        "'VectorMAME' build for use with the Zektor ZVG\n"
+				"Latest code: github.com/palazzol/vmame\n"
 				"Copyright (C) 1997-2005 by Nicola Salmoria and the MAME Team\n\n",build_version);
 		printf("%s\n", mame_disclaimer);
-		printf("Usage:  MAME gamename [options]\n\n"
-				"        MAME -showusage    for a brief list of options\n"
-				"        MAME -createconfig to create a mame.cfg\n\n"
+		printf("Usage:  DVMAME gamename [options]\n\n"
+				"        DVMAME -showusage    for a brief list of options\n"
+				"        DVMAME -createconfig to create a mame.cfg\n\n"
 				"For usage instructions, please consult the file msdos.txt\n");
 		#else
 		showmessinfo();
