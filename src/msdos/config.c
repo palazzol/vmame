@@ -1740,78 +1740,86 @@ int cli_frontend_init( int argc, char **argv )
 		}
 	}
 
-	rompath_extra = dos_dirname( gamepath );
-
-	if( rompath_extra && strlen( rompath_extra ) == 0 )
+	// Gamepath may still be NULL here
+	if (gamepath)
 	{
-		free( rompath_extra );
-		rompath_extra = NULL;
+		rompath_extra = dos_dirname( gamepath );
+
+		if( rompath_extra && strlen( rompath_extra ) == 0 )
+		{
+			free( rompath_extra );
+			rompath_extra = NULL;
+		}
+
+		gamename = dos_basename( gamepath );
+		gamename = dos_strip_extension( gamename );
 	}
-
-	gamename = dos_basename( gamepath );
-	gamename = dos_strip_extension( gamename );
-
+	
 	if( !createconfig )
 	{
-		struct rc_struct *rc;
-
-		/* If not playing back a new .inp file */
-		if( game_index == -1 )
+		// Gamepath may still be NULL here
+		if (gamepath)
 		{
-			i = 0;
-			while( drivers[ i ] != NULL )
+			struct rc_struct *rc;
+
+			/* If not playing back a new .inp file */
+			if( game_index == -1 )
 			{
-				if( mame_stricmp( gamename, drivers[i]->name ) == 0 )
+				i = 0;
+				while( drivers[ i ] != NULL )
 				{
-					game_index = i;
-					break;
+					if( mame_stricmp( gamename, drivers[i]->name ) == 0 )
+					{
+						game_index = i;
+						break;
+					}
+					i++;
 				}
-				i++;
 			}
-		}
 
 #ifdef MAME_DEBUG
-		if (game_index == -1)
-		{
-			/* pick a random game */
-			if (mame_stricmp(gamename,"random") == 0)
+			if (game_index == -1)
 			{
-				struct timeval t;
+				/* pick a random game */
+				if (mame_stricmp(gamename,"random") == 0)
+				{
+					struct timeval t;
 
-				i = 0;
-				while (drivers[i]) i++;	/* count available drivers */
+					i = 0;
+					while (drivers[i]) i++;	/* count available drivers */
 
-				gettimeofday(&t,0);
-				srand(t.tv_sec);
-				game_index = rand() % i;
+					gettimeofday(&t,0);
+					srand(t.tv_sec);
+					game_index = rand() % i;
 
-				printf("Running %s (%s) [press return]\n",drivers[game_index]->name,drivers[game_index]->description);
-				getchar();
+					printf("Running %s (%s) [press return]\n",drivers[game_index]->name,drivers[game_index]->description);
+					getchar();
+				}
 			}
-		}
 #endif
-		/* we give up. print a few approximate matches */
-		if (game_index == -1)
-		{
-			fprintf(stderr, "\n\"%s\" approximately matches the following\n"
-					"supported games (best match first):\n\n", gamename);
-			show_approx_matches();
-			return -1;
-		}
+			/* we give up. print a few approximate matches */
+			if (game_index == -1)
+			{
+				fprintf(stderr, "\n\"%s\" approximately matches the following\n"
+						"supported games (best match first):\n\n", gamename);
+				show_approx_matches();
+				return -1;
+			}
 
-		srcfile = dos_strip_extension( dos_basename( drivers[ game_index ]->source_file ) );
+			srcfile = dos_strip_extension( dos_basename( drivers[ game_index ]->source_file ) );
 
-		get_fileio_opts();
+			get_fileio_opts();
 
-		rc = rc_create();
-		rc_register( rc, frontend_opts );
+			rc = rc_create();
+			rc_register( rc, frontend_opts );
 #ifdef MESS
-		rc_register( rc, mess_opts );
-		msdos_add_mess_device_options(rc, drivers[game_index]);
+			rc_register( rc, mess_opts );
+			msdos_add_mess_device_options(rc, drivers[game_index]);
 #endif
-		get_rc_opts( rc->option );
-		rc_destroy( rc );
-
+			get_rc_opts( rc->option );
+			rc_destroy( rc );
+		}
+		
 		if( frontend_help( gamename, gamepath ) != 1234 )
 		{
 			return -1;
