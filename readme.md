@@ -1,15 +1,19 @@
 
 # VectorMAME #
 
-This is a DOS version of the MAME emulator, for use with the ZVG vector-generator board.
+This is a MS-DOS version of the MAME emulator, for use with the ZVG vector-generator board.
 
 http://www.zektor.com/zvg/vectormame.htm
 
 The last version of MAME available from the ZVG folks is based on MAME 0.96,
-but MAME supported dos up until version 0.106.  This repo is based on 0.106,
-with a few tweaks to fix some bad bugs which can cause crashes.
+but MAME supported dos up until version 0.106.  This repo is based on 0.106.
 
-(Setting up a DOS machine is hard enough without having MAME crash on top of it.)
+## Differences from Version 0.106
+
+Version 0.106A:
+
+1) Bug fix for issues when running with no game selected
+2) Add skip_disclaimer and skip_warnings options
 
 ## Build Instructions: ##
 
@@ -21,18 +25,31 @@ The fixes I did to dosmame all apply to the msdos-specific code.
 
 I have included this version of djgpp, as well as the original MAME sources, in the tools directory
 
-If djgpp is installed in c:\djgpp
+To install djgpp and the extra stuff you need:
 
-```
-set DJGPP=c:\djgpp\djgpp.env
-```
+1) Unzip the file **tools\djgpp-gcc343.zip** into a directory on Win98, such as **c:\djsetup**
 
-also, add c:\djgpp\bin to your path
+2) type: **cd c:\djsetup** (Change to that directory)
 
-now to build, type:
+3) type: **set OS=Windows_NT**  (This is a workaround for a small bug in this install package)
+   
+4) type: **install.bat** (This will build and install djgpp and install the graphics, sound, and zvg support files)
 
-```
-make TARGET=vmame MAMEOS=msdos
-```
+Note: this script sets the environment variable DJGPP=c:\djgpp\djgpp.env, and puts c:\djgpp\bin in your path
+You will need to do this again if you restart your system for some reason
 
+Now, to build mame, go into your repo directory and type: 
 
+**make TARGET=vmame MAMEOS=msdos**
+
+If all goes well you should get a fresh **dvmame.exe** in the current directory
+
+If you would also like to compress the dvmame.exe file, type:
+
+**upx dvmame.exe**
+
+This shrinks the file from over 3Mb to about 1Mb
+
+## Binaries ##
+
+Binaries are available in the bin directory.  You may also want to get the menuing software from the original ZVG site.
